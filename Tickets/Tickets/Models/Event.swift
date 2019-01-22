@@ -12,7 +12,7 @@ struct EventData: Codable {
   struct Embedded: Codable {
     let events: [Event]
   }
-  let _embedded: Embedded
+  let _embedded: Embedded?
 }
 
 struct Event: Codable {
@@ -29,8 +29,8 @@ struct Event: Codable {
   let images: [ImageInfo]
   struct DateInfo: Codable {
     struct Start: Codable {
-      let loclDate: String
-      let loclTime: String
+      let localDate: String
+      let localTime: String
       let dateTime: String
     }
     let start: Start

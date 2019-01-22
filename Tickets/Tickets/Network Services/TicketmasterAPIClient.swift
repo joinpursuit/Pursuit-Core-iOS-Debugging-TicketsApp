@@ -15,9 +15,9 @@ final class TicketmasterAPIClient {
   static func searchEvents(keyword: String, isZipcode: Bool, completionHandler: @escaping (AppError?, [Event]?) -> Void) {
     var endpointURLString = ""
     if isZipcode {
-      endpointURLString = "https://app.ticketmaster.com/disco very/v2/events.json?apikey=\(SecretKeys.APIKey)&postalCode=\(keyword)&radius=500&unit=miles"
+      endpointURLString = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=\(SecretKeys.APIKey)&postalCode=\(keyword)&radius=500&unit=miles"
     } else {
-      endpointURLString = "https://app.ticketma ster.com/discovery/v2/events.json?apikey=\(SecretKeys.APIKey)&city=\(keyword)&radius=500&unit=miles"
+      endpointURLString = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=\(SecretKeys.APIKey)&city=\(keyword)&radius=500&unit=miles"
     }
     
     guard let url = URL(string: endpointURLString) else {
@@ -37,14 +37,17 @@ final class TicketmasterAPIClient {
       }
       if let data = data {
         do {
+          var events = [Event]()
           let eventData = try JSONDecoder().decode(EventData.self, from: data)
-          var events = eventData._embedded.events
+          if let foundEvents = eventData._embedded?.events {
+            events = foundEvents
+          }
           events = events.sorted { $0.dates.start.dateTime.dateFromISODateString() < $1.dates.start.dateTime.dateFromISODateString() }
-          completionHandler(nil, eventData._embedded.events)
+          completionHandler(nil, events)
         } catch {
           completionHandler(AppError.jsonDecodingError(error), nil)
         }
       }
-    }
+    }.resume() 
   }
 }

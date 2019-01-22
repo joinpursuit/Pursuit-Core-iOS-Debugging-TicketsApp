@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		577D957E21F6A612008367F2 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577D957D21F6A612008367F2 /* UserDefaultsKeys.swift */; };
 		57B976A121EFAC0D00B54CBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B976A021EFAC0D00B54CBB /* AppDelegate.swift */; };
 		57B976A321EFAC0D00B54CBB /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B976A221EFAC0D00B54CBB /* EventsViewController.swift */; };
 		57B976A621EFAC0D00B54CBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57B976A421EFAC0D00B54CBB /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		577D957D21F6A612008367F2 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		57B9769D21EFAC0D00B54CBB /* Tickets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tickets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57B976A021EFAC0D00B54CBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57B976A221EFAC0D00B54CBB /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				57B976A421EFAC0D00B54CBB /* Main.storyboard */,
 				57B976BD21EFC5FC00B54CBB /* String+Extension.swift */,
 				57B976B921EFC25900B54CBB /* SecretKeys.swift */,
+				577D957D21F6A612008367F2 /* UserDefaultsKeys.swift */,
 				57B976B621EFB16E00B54CBB /* Supporting Files */,
 				57B976AC21EFAC0E00B54CBB /* Info.plist */,
 			);
@@ -198,6 +201,7 @@
 			files = (
 				57B976BE21EFC5FC00B54CBB /* String+Extension.swift in Sources */,
 				57B976C221EFCCE200B54CBB /* CacheImageView.swift in Sources */,
+				577D957E21F6A612008367F2 /* UserDefaultsKeys.swift in Sources */,
 				57B976B521EFB10500B54CBB /* Event.swift in Sources */,
 				57B976A321EFAC0D00B54CBB /* EventsViewController.swift in Sources */,
 				57B976C021EFCBF800B54CBB /* EventDetailViewController.swift in Sources */,

@@ -12,7 +12,13 @@ class EventsViewController: UIViewController {
   
   @IBOutlet weak var tableView: UITableView!
   
-  private var events = [Event]()
+  private var events = [Event]() {
+    didSet {
+      DispatchQueue.main.async {
+        self.tableView.reloadData()
+      }
+    }
+  }
   
   public var isZipcode = true
 
@@ -23,7 +29,7 @@ class EventsViewController: UIViewController {
   }
   
   private func checkForDefaultSearchSettings() {
-    if let searchKeyword = UserDefaults.standard.object(forKey: "Search Setings") as? String {
+    if let searchKeyword = UserDefaults.standard.object(forKey: UserDefaultsKeys.SearchSettings) as? String {
       updateRightButtonItem(keyword: searchKeyword)
     } else {
       updateSearchSettings()
@@ -31,6 +37,7 @@ class EventsViewController: UIViewController {
   }
   
   private func updateRightButtonItem(keyword: String) {
+    isZipcode = true
     for char in keyword {
       if Int(String(char)) == nil {
         isZipcode = false
@@ -52,7 +59,7 @@ class EventsViewController: UIViewController {
         self?.updateRightButtonItem(keyword: textEntered)
         
         // update user defaults with search settings value
-        UserDefaults.standard.set(textEntered, forKey: "Search Settings")
+        UserDefaults.standard.set(textEntered, forKey: UserDefaultsKeys.SearchSettings)
       }
     }
     alertController.addAction(submitAction)
@@ -80,11 +87,12 @@ class EventsViewController: UIViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     guard let indexPath = tableView.indexPathForSelectedRow,
-      let _ = segue.destination as? EventDetailViewController else {
+      let detailViewController = segue.destination as? EventDetailViewController else {
         print("indexPath, eventDetailViewController nil")
         return
     }
-    let _ = events[indexPath.row]
+    let event = events[indexPath.row]
+    detailViewController.event = event
   }
 }
 
@@ -94,7 +102,7 @@ extension EventsViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath)
     let event = events[indexPath.row]
     cell.textLabel?.text = event.name
     cell.detailTextLabel?.text = event.dates.start.dateTime.formatFromISODateString(dateFormat: "MMMM d, yyyy hh:mm a")
